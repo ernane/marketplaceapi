@@ -19,8 +19,9 @@ group :development do
   gem 'spring'
 end
 
-#Api gems
+#Custom Gems
 gem 'active_model_serializers'
+gem 'devise'
 
 group :test do
   gem 'rspec-rails', '~> 2.14'
