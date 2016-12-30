@@ -19,9 +19,14 @@ group :development do
   gem 'spring'
 end
 
-#Custom Gems
+# Custom Gems
 gem 'active_model_serializers'
 gem 'devise'
+gem 'sabisu_rails', github: 'IcaliaLabs/sabisu-rails'
+gem 'compass-rails', '~> 2.0.2'
+gem 'furatto'
+gem 'font-awesome-rails'
+gem 'simple_form'
 
 group :test do
   gem 'rspec-rails', '~> 2.14'
