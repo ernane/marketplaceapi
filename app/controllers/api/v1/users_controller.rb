@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :authenticate_with_token!, only: [:update, :destroy]
   respond_to :json
 
@@ -34,5 +35,9 @@ class Api::V1::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :auth_token)
     # params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def record_not_found(exception)
+    render json: { error: exception.message }, status: :not_found
   end
 end
