@@ -1,0 +1,49 @@
+{
+	"variables": [],
+	"info": {
+		"name": "market_place_client",
+		"_postman_id": "e566f554-927f-647a-6304-1c13fe620417",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SHOW USER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"Retorno Email\"] = jsonData.email === \"ernane.sena@gmail.com\";",
+							"tests[\"Retorno ID\"] = jsonData.id === 1;",
+							"tests[\"Retorno Status HTTP\"] = responseCode.code === 200;",
+							"tests[\"Retorno Content-Type\"] = postman.getResponseHeader(\"Content-Type\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "api.marketplaceapi.dev/users/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.marketplace.v1",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
