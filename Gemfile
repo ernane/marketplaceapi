@@ -12,6 +12,8 @@ gem 'rake', '< 11'
 group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
+  gem 'factory_girl_rails'
+  gem 'ffaker'
 end
 
 group :development do
@@ -31,7 +33,5 @@ gem 'simple_form'
 
 group :test do
   gem 'rspec-rails', '~> 2.14'
-  gem 'factory_girl_rails'
-  gem 'ffaker'
   gem 'shoulda-matchers'
 end
