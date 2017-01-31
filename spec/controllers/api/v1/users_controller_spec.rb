@@ -18,6 +18,20 @@ describe Api::V1::UsersController do
     end
 
     it { should respond_with 200 }
+
+    context 'when is not found' do
+      before(:each) do
+        @user = FactoryGirl.create :user
+        get :show, id: 'a'
+      end
+
+      it 'renders an errors json' do
+        user_response = json_response
+        user_response.key?(:errors)
+      end
+
+      it { should respond_with 404 }
+    end
   end
 
   describe 'POST #create' do

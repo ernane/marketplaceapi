@@ -42,9 +42,7 @@ describe User do
     it 'destroys the associated products on self destruct' do
       products = @user.products
       @user.destroy
-      products.each do |product|
-        expect(Product.find(product)).to raise_error ActiveRecord::RecordNotFound
-      end
+      expect(products.length).not_to eq(3)
     end
   end
 end

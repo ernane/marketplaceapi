@@ -24,6 +24,7 @@ end
 
 # Custom Gems
 gem 'devise'
+gem 'simplecov', :require => false, :group => :test
 gem 'sabisu_rails', github: 'IcaliaLabs/sabisu-rails'
 gem 'active_model_serializers', git: 'git@github.com:rails-api/active_model_serializers.git', branch: '0-8-stable'
 gem 'compass-rails', '~> 2.0.2'

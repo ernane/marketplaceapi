@@ -22,18 +22,19 @@ describe Authenticable do
 
   describe '#authenticate_with_token' do
     before do
-      @user = FactoryGirl.create :user
-      authentication.stub(:current_user).and_return(nil)
-      response.stub(:response_code).and_return(401)
-      response.stub(:body).and_return({ 'errors' => 'Not authenticated' }.to_json)
-      authentication.stub(:response).and_return(response)
+      allow(authentication).to receive(:current_user).and_return(nil)
+      allow(authentication).to receive(:render) do |args|
+        args
+      end
     end
 
-    it 'render a json error message' do
-      expect(json_response[:errors]).to eql 'Not authenticated'
+    it 'returns error' do
+      expect(authentication.authenticate_with_token![:json][:errors]).to eq 'Not authenticated'
     end
 
-    it { should respond_with 401 }
+    it 'returns unauthorized status' do
+      expect(authentication.authenticate_with_token![:status]).to eq :unauthorized
+    end
   end
 
   describe '#user_signed_in?' do
