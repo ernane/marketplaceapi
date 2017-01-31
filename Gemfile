@@ -23,9 +23,9 @@ group :development do
 end
 
 # Custom Gems
-gem 'active_model_serializers'
 gem 'devise'
 gem 'sabisu_rails', github: 'IcaliaLabs/sabisu-rails'
+gem 'active_model_serializers', git: 'git@github.com:rails-api/active_model_serializers.git', branch: '0-8-stable'
 gem 'compass-rails', '~> 2.0.2'
 gem 'furatto'
 gem 'font-awesome-rails'
@@ -33,5 +33,6 @@ gem 'simple_form'
 
 group :test do
   gem 'rspec-rails', '~> 2.14'
+  gem 'fuubar'
   gem 'shoulda-matchers'
 end

@@ -23,4 +23,6 @@ RSpec.configure do |config|
   config.before(:each, type: :controller) do
     include_default_accept_headers
   end
+
+  config.fuubar_progress_bar_options = { format: 'Progress %c/%C <%B> %p%% %a' }
 end
