@@ -13,6 +13,7 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
   gem 'factory_girl_rails'
+  gem 'guard-rspec', require: false
   gem 'ffaker'
 end
 
