@@ -2,6 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'simplecov'
+require 'email_spec'
 SimpleCov.start
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -21,6 +22,8 @@ RSpec.configure do |config|
   config.include(Devise::Test::ControllerHelpers, type: :controller)
   config.include(Request::JsonHelpers, type: :controller)
   config.include(Request::HeadersHelpers, type: :controller)
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 
   config.before(:each, type: :controller) do
     include_default_accept_headers
