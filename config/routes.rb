@@ -1,7 +1,6 @@
 require 'api_constraints'
 
 Rails.application.routes.draw do
-  mount SabisuRails::Engine => '/sabisu_rails'
   devise_for :users, skip: [:registrations]
   # devise_for :users
   namespace :api, defaults: { format: :json }, path: '/' do
