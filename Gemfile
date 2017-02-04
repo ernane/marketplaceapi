@@ -26,8 +26,7 @@ end
 # Custom Gems
 gem 'devise'
 gem 'simplecov', require: false, group: :test
-gem 'active_model_serializers', git: 'git@github.com:rails-api/active_model_serializers.git', branch: '0-8-stable'
-
+gem 'active_model_serializers', '~> 0.10.0'
 group :test do
   gem 'rspec-rails', '~> 2.14'
   gem 'fuubar'
