@@ -13,7 +13,7 @@ describe Api::V1::OrdersController do
     end
 
     it 'returns 4 order records from the user' do
-      orders_response = json_response[:orders]
+      orders_response = json_response[:data]
       expect(orders_response.length).to eq(4)
     end
 
@@ -28,18 +28,18 @@ describe Api::V1::OrdersController do
     end
 
     it 'returns the user order record matching the id' do
-      order_response = json_response[:order]
-      expect(order_response[:id]).to eql @order.id
+      order_response = json_response[:data]
+      expect(order_response[:id]).to eql @order.id.to_s
     end
 
     it 'includes the total for the order' do
-      order_response = json_response[:order]
-      expect(order_response[:total]).to eql @order.total.to_s
+      order_response = json_response[:data]
+      expect(order_response[:attributes][:total]).to eql @order.total.to_s
     end
 
     it 'includes the products on the order' do
-      order_response = json_response[:order]
-      expect(order_response[:products].length).to eq(1)
+      order_response = json_response[:data]
+      expect(order_response[:relationships][:products].length).to eq(1)
     end
 
     it { should respond_with 200 }
@@ -54,8 +54,8 @@ describe Api::V1::OrdersController do
     end
 
     it 'returns the just user order record' do
-      order_response = json_response[:order]
-      expect(order_response[:id]).to be_truthy
+      order_response = json_response[:data]
+      expect(order_response[:attributes][:total]).to be_truthy
     end
 
     it { should respond_with 201 }
