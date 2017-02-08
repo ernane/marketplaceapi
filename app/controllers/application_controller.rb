@@ -1,7 +1,17 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
   include Authenticable
+
+  protected
+
+  def pagination_meta(object)
+    {
+      current_page: object.current_page,
+      next_page: object.next_page,
+      prev_page: object.previous_page,
+      total_pages: object.total_pages,
+      total_count: object.total_entries
+    }
+  end
 end

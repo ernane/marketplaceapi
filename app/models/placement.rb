@@ -4,6 +4,8 @@ class Placement < ActiveRecord::Base
 
   after_create :decrement_product_quantity!
 
+  validates :quantity, presence: true
+
   def decrement_product_quantity!
     product.decrement!(:quantity, quantity)
   end

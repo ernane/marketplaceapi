@@ -3,7 +3,10 @@ class Api::V1::OrdersController < ApplicationController
   respond_to :json
 
   def index
-    respond_with current_user.orders
+    orders = current_user.orders
+                         .page(params[:page] ? params[:page][:number] : 1)
+                         .per_page(params[:page] ? params[:page][:size] : 10)
+    render json: orders, meta: { pagination: pagination_meta(orders) }
   end
 
   def show
@@ -18,14 +21,12 @@ class Api::V1::OrdersController < ApplicationController
       order.reload
       OrderMailer.send_confirmation(order).deliver_now
       render json: order, status: 201, location: [:api, current_user, order]
-    else
-      render json: { errors: order.errors }, status: 422
     end
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:product_ids => [])
+    params.require(:order).permit(product_ids: [])
   end
 end

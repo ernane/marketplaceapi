@@ -8,14 +8,16 @@ describe Api::V1::OrdersController do
 
   describe 'GET #index' do
     before(:each) do
-      4.times { FactoryGirl.create :order, user: @current_user }
+      11.times { FactoryGirl.create :order, user: @current_user }
       get :index, user_id: @current_user.id
     end
 
-    it 'returns 4 order records from the user' do
+    it 'returns 10 order records from the user' do
       orders_response = json_response[:data]
-      expect(orders_response.length).to eq(4)
+      expect(orders_response.length).to eq(10)
     end
+
+    it_behaves_like 'paginated list'
 
     it { should respond_with 200 }
   end
@@ -46,23 +48,25 @@ describe Api::V1::OrdersController do
   end
 
   describe 'POST #create' do
-    before(:each) do
-      product_1 = FactoryGirl.create :product
-      product_2 = FactoryGirl.create :product
-      order_params = { product_ids_and_quantities: [[product_1.id, 2],[ product_2.id, 3]] }
-      post :create, user_id: @current_user.id, order: order_params
-    end
+    context 'when is successfully created' do
+      before(:each) do
+        product_1 = FactoryGirl.create :product
+        product_2 = FactoryGirl.create :product
+        order_params = { product_ids_and_quantities: [[product_1.id, 2], [product_2.id, 3]] }
+        post :create, user_id: @current_user.id, order: order_params
+      end
 
-    it 'returns the just user order record' do
-      order_response = json_response[:data]
-      expect(order_response[:id]).to be_truthy
-    end
+      it 'returns the just user order record' do
+        order_response = json_response[:data]
+        expect(order_response[:id]).to be_truthy
+      end
 
-    it 'embeds the two product objects related to the order' do
-      order_response = json_response[:data]
-      expect(order_response[:relationships][:products][:data].size).to eq(2)
-    end
+      it 'embeds the two product objects related to the order' do
+        order_response = json_response[:data]
+        expect(order_response[:relationships][:products][:data].size).to eq(2)
+      end
 
-    it { should respond_with 201 }
+      it { should respond_with 201 }
+    end
   end
 end

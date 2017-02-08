@@ -22,7 +22,7 @@ describe Api::V1::ProductsController do
 
   describe 'GET #index' do
     before(:each) do
-      31.times { FactoryGirl.create :product }
+      11.times { FactoryGirl.create :product }
       get :index
     end
 
@@ -31,9 +31,9 @@ describe Api::V1::ProductsController do
         get :index
       end
 
-      it 'returns 30 records from the database' do
+      it 'returns 10 records from the database' do
         products_response = json_response[:data]
-        expect(products_response.length).to eq(30)
+        expect(products_response.length).to eq(10)
       end
 
       it 'returns the user object into each product' do
@@ -43,11 +43,7 @@ describe Api::V1::ProductsController do
         end
       end
 
-      it { expect(json_response[:meta][:pagination]).to be_truthy }
-      it { expect(json_response[:meta][:pagination][:'current-page']).to be_truthy }
-      it { expect(json_response[:meta][:pagination][:'next-page']).to be_truthy }
-      it { expect(json_response[:meta][:pagination][:'total-pages']).to be_truthy }
-      it { expect(json_response[:meta][:pagination][:'total-count']).to be_truthy }
+      it_behaves_like 'paginated list'
 
       it { should respond_with 200 }
     end
