@@ -19,7 +19,7 @@ class Api::V1::OrdersController < ApplicationController
 
     if order.save
       order.reload
-      OrderMailer.send_confirmation(order).deliver_now
+      OrderMailer.delay.send_confirmation(order)
       render json: order, status: 201, location: [:api, current_user, order]
     end
   end

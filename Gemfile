@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rake', '< 11'
 gem 'will_paginate'
+gem 'delayed_job_active_record'
 
 group :development, :test do
   gem 'byebug'
